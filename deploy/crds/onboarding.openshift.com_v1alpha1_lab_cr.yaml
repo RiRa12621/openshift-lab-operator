@@ -1,0 +1,7 @@
+apiVersion: onboarding.openshift.com/v1alpha1
+kind: Lab
+metadata:
+  name: example-lab
+spec:
+  # Add fields here
+  size: 3
