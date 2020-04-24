@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openshift-lab-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: openshift-lab-operator
+  template:
+    metadata:
+      labels:
+        name: openshift-lab-operator
+    spec:
+      serviceAccountName: openshift-lab-operator
+      containers:
+        - name: openshift-lab-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - openshift-lab-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "openshift-lab-operator"
